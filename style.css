@@ -19,6 +19,10 @@
     cursor: pointer;
   }
 
+  #title{
+      text-align: center;
+  }
+
   /* .correctButton{
     border-color: green;
     border-width: 5px;
