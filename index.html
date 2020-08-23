@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia App</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 
 </head>
@@ -12,24 +20,51 @@
 <body>
     <h1>Trivia Game</h1>
 
-    <button id="startGame">Start Game</button>
+    <button id="startGame">Quick Game</button>
 
     <!--Modal-->
     <div class="modal" id="gameModal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <span class="close">&times;</span>
 
-            <p id="category"></p>
-            <p id="difficulty"></p>
-            <p id="question"></p>
-            <button id="answer1"></button>
-            <button id="answer2"></button>
-            <button id="answer3"></button>
-            <button id="answer4"></button>
+        <!-- Jumbotron -->
+        <div class="card card-image" id="backgroundImg"
+            style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
+            <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+
+                <!-- Info Text Row -->
+                <div class="container">
+                    <div class="row">
+                        <p class="card-text py-2 col-sm" id="category"></p>
+                        <p class="card-text py-2 col-sm" id="difficulty"></p>
+                        <p class="card-text py-2 col-sm" id="score">Score: 0</p>
+                    </div>
+                </div>
+                <div class="py-5">
+
+                    <!-- Content -->
+                    <!-- <h5 class="h5 orange-text"><i class="fas fa-camera-retro"></i> Photography</h5> -->
+                    <h2 class="card-title h2 my-4 py-2" id="question">Jumbotron with image overlay</h2>
+                    <p class="mb-4 pb-2 px-md-5 mx-md-5"></p>
+                    <!--Answer Buttons-->
+                    <div class="container">
+                        <div class="row" id="shuffle">
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="answer1"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="answer2"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="answer3"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="answer4"></button></div>
+                        </div>
+                    </div>
+
+                    <p class="card-text py-2" id="response"></p>
+                    <button class="btn peach-gradient btn-rounded mb-4" id="nextQ">Next Question</button>
+
+                </div>
+            </div>
         </div>
+        <!-- Jumbotron -->
+
 
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
