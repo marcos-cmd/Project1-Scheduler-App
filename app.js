@@ -8,7 +8,7 @@ $(document).ready(function () {
     var modal = document.getElementById("gameModal"); // get the endless game mode modal
 
     var startBtn = document.getElementById("startGame");
-     // Get the button that opens the modal
+    // Get the button that opens the modal
 
     var closeBtn = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
@@ -51,7 +51,7 @@ $(document).ready(function () {
       $("#answer3").html(data.results[0].incorrect_answers[1]);
       $("#answer4").html(data.results[0].incorrect_answers[2]);
     }
-    
+
     // function to shuffle the endless game mode's answers' order
     function shuffle(e) {
       const parent = $("#shuffle");
@@ -164,6 +164,8 @@ $(document).ready(function () {
   // Open Timed Game modal onClick function
   $("#startTimed").click(function (event) {
     $("#timeModal").show();
+    // getQuestions(newTriviaURL);
+ 
     // useTriviaQ(triviaQ);
   });
   // close timed game modal when clicking "x"
@@ -180,19 +182,100 @@ $(document).ready(function () {
   // Score is related time left for question (If you answer at the last second, you get 1/30 points)
 
   function useTriviaQ(triviaQ) {
-  $("#category").html(`Category: ${triviaQ.results[0].category}`);
-  $("#difficulty").html(`Difficulty: ${triviaQ.results[0].difficulty}`);
-  shuffle();
 
-  //for loop function
-  for (let i = 0; i < triviaQ.results.length; i++){
-  $("#timedQuestion").html(`Question: ${triviaQ.results[i].question}`);
-  $("#timedAnswer1").html(`${triviaQ.results[i].correct_answer}`);
-  $("#timedAnswer2").html(`${triviaQ.results[i].incorrect_answers[0]}`);
-  $("#timedAnswer3").html(`${triviaQ.results[i].incorrect_answers[1]}`);
-  $("#timedAnswer4").html(`${triviaQ.results[i].incorrect_answers[2]}`);
-  }};
+    shuffle();
 
+    //for loop function
+    for (let i = 0; i < triviaQ.results.length; i++) {
+      $("#timedCategory").html(`Category: ${triviaQ.results[0].category}`);
+      $("#timedDifficulty").html(`Difficulty: ${triviaQ.results[0].difficulty}`);
+      $("#timedQuestion").html(`Question: ${triviaQ.results[i].question}`);
+      $("#timedAnswer1").html(`${triviaQ.results[i].correct_answer}`);
+      $("#timedAnswer2").html(`${triviaQ.results[i].incorrect_answers[0]}`);
+      $("#timedAnswer3").html(`${triviaQ.results[i].incorrect_answers[1]}`);
+      $("#timedAnswer4").html(`${triviaQ.results[i].incorrect_answers[2]}`);
+    }
+  };
+
+  // function to shuffle the endless game mode's answers' order
+  function shuffle(e) {
+    const parent = $("#shuffle");
+    const divs = parent.children();
+    while (divs.length) {
+      parent.append(
+        divs.splice(Math.floor(Math.random() * divs.length), 1)[0]
+      );
+    }
+  }
+
+  // This function color-codes the correct answer green and incorrect answers red
+  function timedOutlineAnswers() {
+    if ($("#timedAnswer1").hasClass("blue-gradient")) {
+      $("#timedAnswer1")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-success");
+      $("#timedAnswer2")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedAnswer3")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedAnswer4")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedScore").text(`Score: ${score}`);
+    }
+  }
+  function timedResetOutline() {
+    if ($("#timedAnswer1").hasClass("btn-outline-success")) {
+      $("#timedAnswer1")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-success");
+      $("#timedAnswer2")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedAnswer3")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedAnswer4")
+        .toggleClass("blue-gradient")
+        .toggleClass("btn-outline-danger");
+      $("#timedScore").text(`Score: ${score}`);
+    }
+  }
+  // Correct Answer 1 onClick function
+  $("#timedAnswer1").click(function (event) {
+    if ($("#timedAnswer1").hasClass("blue-gradient")) {
+      // score++;
+      $("#timedResponse").text("You are correct!");
+    }
+    timedOutlineAnswers();
+    console.log("it worked");
+  });
+
+  // Incorrect Answer 2 onClick function
+  $("#timedAnswer2").click(function (event) {
+    timedOutlineAnswers();
+    $("#timedResponse").text("You are wrong!");
+  });
+
+  // Incorrect Answer 3 onClick function
+  $("#timedAnswer3").click(function (event) {
+    timedOutlineAnswers();
+    $("#timedResponse").text("You are wrong!");
+  });
+
+  // Incorrect Answer  4 onClick function
+  $("#timedAnswer4").click(function (event) {
+    timedOutlineAnswers();
+    $("#timedResponse").text("You are wrong!");
+  });
+
+  // Next Button onClick function
+  $("#nextQ").click(function (event) {
+    timedResetOutline();
+    $("#timedResponse").text("");
+  });
 
   // question one pathway: results[0]
   // Timer
@@ -219,34 +302,40 @@ $(document).ready(function () {
 
   //------------------------------------------------------------------------------------
   // TRIVIA API : https://opentdb.com/
-
   let triviaURL = `https://opentdb.com/api.php?`;
+  let newTriviaURL;
+  // let amount = 5;
+  // let amount = $("#numSelect").val();
 
-  let category = "";
-  let amount = "5";
+  function changeSettings() {
+    let category = "";
+    let amount = $("#numSelect").val();
 
-  function getQuestions(triviaURL) {
+    //console log 
+    console.log("numSelect: " + $("#numSelect").val());
+    console.log("amount: " + amount);
+    
+    amountURL = `amount=${amount}`;
+    category = $("#categorySelect").val();
+    categoryURL = `&category=${category}`;
+    difficulty = $("#difficultySelect").val();
+    difficultyURL =`&difficulty=${difficulty}`;
+    newTriviaURL = triviaURL + amountURL + categoryURL + difficultyURL + `&type=multiple`;
+    console.log(newTriviaURL);
+    console.log("amount: " + triviaURL);
+    getQuestions(newTriviaURL);
+  }
+
+  function getQuestions(newTriviaURL) {
     $.ajax({
-      url: triviaURL,
+      url: newTriviaURL,
       method: "GET"
     }).done(function (triviaQ) {
       console.log(triviaQ);
       useTriviaQ(triviaQ);
-        // let triviaQ = response.json();
-    });
-  }
-
-  function changeSettings() {
-    amount = $("#numSelect").val();
-    triviaURL = triviaURL + `amount=${amount}`
-    category = $("#categorySelect").val();
-    triviaURL = triviaURL + `&category=${category}`;
-    difficulty = $("#difficultySelect").val();
-    triviaURL = triviaURL + `&difficulty=${difficulty}`;
-    triviaURL = triviaURL + `&type=multiple`;
-    console.log(triviaURL);
-    getQuestions(triviaURL);
-  }
+      // let triviaQ = response.json();
+    })};
+  
   //------------------------------------------------------------------------------------
   //Photo-API "Unsplash"
 
