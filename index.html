@@ -264,6 +264,7 @@
                     View the high scores for each game type.<br>
                     <br>
                     <br>
+                    <br>
                   </p>
                 </div>
               </div>
@@ -280,40 +281,20 @@
 
     <!--Endless Game Modal Begin-->
     <div class="modal" id="gameModal">
-      <span class="close">&times;</span>
+        <span class="close">&times;</span>
 
-      <!-- Jumbotron Begin-->
-      <div
-        class="card card-image"
-        id="backgroundImg"
-        style="
-          background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);
-        "
-      >
-        <div class="text-white text-center rgba-stylish-strong py-5 px-4">
-          <!-- Game Info Text Row -->
-          <div class="container">
-            <div class="row">
-              <p class="card-text py-2 col-sm" id="category"></p>
-              <p class="card-text py-2 col-sm" id="difficulty"></p>
-              <p class="card-text py-2 col-sm" id="score">Score: 0</p>
-            </div>
-          </div>
-          <div class="py-5">
-            <!-- Question & Answer Content -->
-            <!-- <h5 class="h5 orange-text"><i class="fas fa-camera-retro"></i> Photography</h5> -->
-            <h2 class="card-title h2 my-4 py-2" id="question">
-              Jumbotron with image overlay
-            </h2>
-            <p class="mb-4 pb-2 px-md-5 mx-md-5"></p>
-            <!--Answer Buttons-->
-            <div class="container">
-              <div class="row" id="shuffle">
-                <div class="col-md">
-                  <button
-                    class="btn blue-gradient btn-rounded mb-4"
-                    id="answer1"
-                  ></button>
+        <!-- Jumbotron Begin-->
+        <div class="card card-image" id="endlessBackground"
+            style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
+            <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+
+                <!-- Game Info Text Row -->
+                <div class="container">
+                    <div class="row">
+                        <p class="card-text py-2 col-sm" id="category"></p>
+                        <p class="card-text py-2 col-sm" id="difficulty"></p>
+                        <p class="card-text py-2 col-sm" id="score">Score: 0</p>
+                    </div>
                 </div>
                 <div class="col-md">
                   <button
@@ -356,53 +337,47 @@
 
     <!--============================================================================================================================================================================-->
     <!--Timed Game Modal Begin-->
-    <div class="modal" id="gameModal">
-      <span class="close">&times;</span>
+    <div class="modal" id="timeModal">
+        <span class="close">&times;</span>
 
-      <!-- Jumbotron Begin-->
-      <div
-        class="card card-image"
-        id="backgroundImg"
-        style="
-          background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);
-        "
-      >
-        <div class="text-white text-center rgba-stylish-strong py-5 px-4">
-          <!-- Game Info Text Row -->
-          <div class="container">
-            <div class="row">
-              <p class="card-text py-2 col-sm" id="category"></p>
-              <p class="card-text py-2 col-sm" id="difficulty"></p>
-              <p class="card-text py-2 col-sm" id="score">Score: 0</p>
-            </div>
-          </div>
-          <div class="py-5">
-            <!-- Question & Answer Content -->
-            <!-- <h5 class="h5 orange-text"><i class="fas fa-camera-retro"></i> Photography</h5> -->
-            <h2 class="card-title h2 my-4 py-2" id="question">
-              Jumbotron with image overlay
-            </h2>
-            <p class="mb-4 pb-2 px-md-5 mx-md-5"></p>
-            <!--Answer Buttons-->
-            <div class="container">
-              <div class="row" id="shuffle">
-                <div class="col-md">
-                  <button
-                    class="btn blue-gradient btn-rounded mb-4"
-                    id="answer1"
-                  ></button>
+        <!-- Jumbotron Begin-->
+        <div class="card card-image" id="backgroundImg"
+            style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
+            <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+
+                <!-- Game Info Text Row -->
+                <div class="container">
+                    <div class="row">
+                        <p class="card-text py-2 col-sm" id="category"></p>
+                        <p class="card-text py-2 col-sm" id="difficulty"></p>
+                        <p class="card-text py-2 col-sm" id="score">Score: 0</p>
+                        <p class="card-text py-2 col-sm" id="timer">Timer: 0</p>
+                    </div>
                 </div>
-                <div class="col-md">
-                  <button
-                    class="btn blue-gradient btn-rounded mb-4"
-                    id="answer2"
-                  ></button>
-                </div>
-                <div class="col-md">
-                  <button
-                    class="btn blue-gradient btn-rounded mb-4"
-                    id="answer3"
-                  ></button>
+                <div class="py-5">
+
+                    <!-- Question & Answer Content -->
+                    <!-- <h5 class="h5 orange-text"><i class="fas fa-camera-retro"></i> Photography</h5> -->
+                    <h2 class="card-title h2 my-4 py-2" id="timedQuestion">Jumbotron with image overlay</h2>
+                    <p class="mb-4 pb-2 px-md-5 mx-md-5"></p>
+                    <!--Answer Buttons-->
+                    <div class="container">
+                        <div class="row" id="shuffle">
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4"
+                                    id="timedAnswer1"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4"
+                                    id="timedAnswer2"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4"
+                                    id="timedAnswer3"></button></div>
+                            <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4"
+                                    id="timedAnswer4"></button></div>
+                        </div>
+                    </div>
+                    <!--Correct vs Incorrect-->
+                    <p class="card-text py-2" id="response"></p>
+                    <!--Other Buttons-->
+                    <button class="btn peach-gradient btn-rounded mb-4" id="nextQ">Next Question</button>
+                    <button class="btn mean-fruit-gradient btn-rounded mb-4" id="endGame">End Game</button>
                 </div>
                 <div class="col-md">
                   <button
@@ -434,14 +409,117 @@
     <!--============================================================================================================================================================================-->
     <!--Options Modal Begin-->
     <div class="modal" id="optionsModal">
-      <span class="close">&times;</span>
+        <span class="close">&times;</span>
+        <!-- Options jumbotron -->
+        <div class="jumbotron text-center hoverable p-4">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+                    <!-- Test image -->
+                    <div class="view overlay">
+                        <img id="testImage" src="https://mdbootstrap.com/img/Photos/Others/laptop-sm.jpg"
+                            class="img-fluid inline-block" alt="Sample image for first version of blog listing">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-7 text-md-left ml-3 mt-3">
+
+                    <!-- Excerpt -->
+                    <a class="blue-text">
+                        <h4 class="h4 pb-1"><i class="fas fa-cogs pr-1"></i> Settings</h4>
+                    </a>
+
+                    <h6 class="h6 mb-4">These options influence your timed game settings.</h6>
+
+                    <!--Number of Questions select-->
+                    <select id="numSelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                        <option value="15">15 Questions</option>
+                        <option value="20">20 Questions</option>
+                        <option value="25">25 Questions</option>
+                    </select>
+                    <label class="mdb-main-label">Number of Questions</label>
+                    <!--/Questions select-->
+                    <br>
+                    <!--Category select-->
+                    <select class="mdb-select md-form colorful-select dropdown-primary" id="categorySelect">
+                        <option value="any">Any Category</option>
+                        <option value="9">General Knowledge</option>
+                        <option value="10">Books</option>
+                        <option value="11">Film</option>
+                        <option value="12">Music</option>
+                        <option value="13">Musicals & Theatres</option>
+                        <option value="14">Television</option>
+                        <option value="15">Video Games</option>
+                        <option value="16">Board Games</option>
+                        <option value="17">Science & Nature</option>
+                        <option value="18">Computers</option>
+                        <option value="19">Mathematics</option>
+                        <option value="20">Mythology</option>
+                        <option value="21">Sports</option>
+                        <option value="22">Geography</option>
+                        <option value="23">History</option>
+                        <option value="24">Politics</option>
+                        <option value="25">Art</option>
+                        <option value="26">Celebrities</option>
+                        <option value="27">Animals</option>
+                        <option value="28">Vehicles</option>
+                        <option value="29">Comics</option>
+                        <option value="30">Gadgets</option>
+                        <option value="31">Japanese Anime & Manga</option>
+                        <option value="32">Cartoon & Animations</option>
+                    </select>
+                    <label class="mdb-main-label">Select Category</label>
+                    <!--/Category select-->
+                    <br>
+                    <!--Difficulty select-->
+                    <select id="difficultySelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <!--/Difficulty select-->
+                    <br>
+                    <!--Timer select-->
+                    <select id="timerSelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="30">30 Seconds</option>
+                        <option value="20">20 Seconds</option>
+                        <option value="10">10 Seconds</option>
+                    </select>
+                    <label class="mdb-main-label">Select Time per Question</label>
+                    <!--/ Timer select-->
+                    <br>
+
+                    <br>
+                    <button id="changeSettings" class="btn sunny-morning-gradient">Change Settings</button>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- News jumbotron -->
     </div>
     <!--Options Modal End-->
 
     <!--============================================================================================================================================================================-->
     <!--High Scores Modal Begin-->
-    <div class="modal" id="gameModal">
-      <span class="close">&times;</span>
+    <div class="modal" id="scoreModal">
+        <span class="close">&times;</span>
+
     </div>
     <!--High Scores Modal End-->
 

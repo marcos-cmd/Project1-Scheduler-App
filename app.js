@@ -7,7 +7,8 @@ $(document).ready(function () {
 
     var modal = document.getElementById("gameModal"); // get the endless game mode modal
 
-    var startBtn = document.getElementById("startGame"); // Get the button that opens the modal
+    var startBtn = document.getElementById("startGame");
+     // Get the button that opens the modal
 
     var closeBtn = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
@@ -50,7 +51,7 @@ $(document).ready(function () {
       $("#answer3").html(data.results[0].incorrect_answers[1]);
       $("#answer4").html(data.results[0].incorrect_answers[2]);
     }
-
+    
     // function to shuffle the endless game mode's answers' order
     function shuffle(e) {
       const parent = $("#shuffle");
@@ -160,14 +161,219 @@ $(document).ready(function () {
   // ===================================================================================
   // Timed Game Mode
   // ===================================================================================
+  // Open Timed Game modal onClick function
+  $("#startTimed").click(function (event) {
+    $("#timeModal").show();
+    // useTriviaQ(triviaQ);
+  });
+  // close timed game modal when clicking "x"
+  $(".close").click(function (event) {
+    $("#timeModal").hide();
+  });
+  // close timed game modal when clicking outside modal
+  $(window).click(function (event) {
+    if (event.target == timeModal) {
+      $("#timeModal").hide();
+    }
+  });
+
+  // Score is related time left for question (If you answer at the last second, you get 1/30 points)
+
+  function useTriviaQ(triviaQ) {
+  $("#category").html(`Category: ${triviaQ.results[0].category}`);
+  $("#difficulty").html(`Difficulty: ${triviaQ.results[0].difficulty}`);
+  shuffle();
+
+  //for loop function
+  for (let i = 0; i < triviaQ.results.length; i++){
+  $("#timedQuestion").html(`Question: ${triviaQ.results[i].question}`);
+  $("#timedAnswer1").html(`${triviaQ.results[i].correct_answer}`);
+  $("#timedAnswer2").html(`${triviaQ.results[i].incorrect_answers[0]}`);
+  $("#timedAnswer3").html(`${triviaQ.results[i].incorrect_answers[1]}`);
+  $("#timedAnswer4").html(`${triviaQ.results[i].incorrect_answers[2]}`);
+  }};
+
+
+  // question one pathway: results[0]
+  // Timer
+  // 
 
   // ===================================================================================
   // Options
   // ===================================================================================
-  $("#backgroundImg");
+
+  // Open Options modal onClick function
+  $("#startOptions").click(function (event) {
+    $("#optionsModal").show();
+  });
+  // close options modal when clicking "x"
+  $(".close").click(function (event) {
+    $("#optionsModal").hide();
+  });
+  // close options modal when clicking outside modal
+  $(window).click(function (event) {
+    if (event.target == optionsModal) {
+      $("#optionsModal").hide();
+    }
+  });
+
+  //------------------------------------------------------------------------------------
+  // TRIVIA API : https://opentdb.com/
+
+  let triviaURL = `https://opentdb.com/api.php?`;
+
+  let category = "";
+  let amount = "5";
+
+  function getQuestions(triviaURL) {
+    $.ajax({
+      url: triviaURL,
+      method: "GET"
+    }).done(function (triviaQ) {
+      console.log(triviaQ);
+      useTriviaQ(triviaQ);
+        // let triviaQ = response.json();
+    });
+  }
+
+  function changeSettings() {
+    amount = $("#numSelect").val();
+    triviaURL = triviaURL + `amount=${amount}`
+    category = $("#categorySelect").val();
+    triviaURL = triviaURL + `&category=${category}`;
+    difficulty = $("#difficultySelect").val();
+    triviaURL = triviaURL + `&difficulty=${difficulty}`;
+    triviaURL = triviaURL + `&type=multiple`;
+    console.log(triviaURL);
+    getQuestions(triviaURL);
+  }
+  //------------------------------------------------------------------------------------
+  //Photo-API "Unsplash"
+
+  const APIKey = `b6D6Vk41Z56yMWK4umGb0HfLtJX4Z-MVIbJcVAIk5mM`;
+
+  let photosURL = `https://api.unsplash.com/search/photos/?client_id=${APIKey}`;
+
+  let searchTerm = "";
+
+  function getPhotos(photosURL) {
+    $.ajax({
+      url: photosURL,
+      method: "GET"
+    }).done(function (photoData) {
+      console.log(photoData);
+      // We want this to pull the same amount of images as questions
+      let image = photoData.results[1].urls.regular + "fit=fillmax&crop=entropy";
+      console.log(image);
+      // We want this to loop through each photo as you move on to the next question
+      $("#testImage").attr("src", `${image}`);
+    });
+  }
+
+  function photoSettings() {
+    // This should pull a keyword based on the category selected
+    if ($("#categorySelect").val() == "any") {
+      searchTerm = "random";
+    }
+    else if ($("#categorySelect").val() == 9) {
+      searchTerm = "knowledge";
+    }
+    else if ($("#categorySelect").val() == 10) {
+      searchTerm = "books";
+    }
+    else if ($("#categorySelect").val() == 11) {
+      searchTerm = "film";
+    }
+    else if ($("#categorySelect").val() == 12) {
+      searchTerm = "music";
+    }
+    else if ($("#categorySelect").val() == 13) {
+      searchTerm = "theatre";
+    }
+    else if ($("#categorySelect").val() == 14) {
+      searchTerm = "television";
+    }
+    else if ($("#categorySelect").val() == 15) {
+      searchTerm = "video games";
+    }
+    else if ($("#categorySelect").val() == 16) {
+      searchTerm = "board games";
+    }
+    else if ($("#categorySelect").val() == 17) {
+      searchTerm = "nature";
+    }
+    else if ($("#categorySelect").val() == 18) {
+      searchTerm = "computers";
+    }
+    else if ($("#categorySelect").val() === 19) {
+      searchTerm = "math";
+    }
+    else if ($("#categorySelect").val() == 20) {
+      searchTerm = "mythology";
+    }
+    else if ($("#categorySelect").val() == 21) {
+      searchTerm = "sports";
+    }
+    else if ($("#categorySelect").val() == 22) {
+      searchTerm = "maps";
+    }
+    else if ($("#categorySelect").val() == 23) {
+      searchTerm = "historic";
+    }
+    else if ($("#categorySelect").val() == 24) {
+      searchTerm = "political";
+    }
+    else if ($("#categorySelect").val() == 25) {
+      searchTerm = "art";
+    }
+    else if ($("#categorySelect").val() == 26) {
+      searchTerm = "celebrity";
+    }
+    else if ($("#categorySelect").val() == 27) {
+      searchTerm = "animals";
+    }
+    else if ($("#categorySelect").val() == 28) {
+      searchTerm = "vehicles";
+    }
+    else if ($("#categorySelect").val() == 29) {
+      searchTerm = "comics";
+    }
+    else if ($("#categorySelect").val() == 30) {
+      searchTerm = "gadgets";
+    }
+    else if ($("#categorySelect").val() == 31) {
+      searchTerm = "anime";
+    }
+    else if ($("#categorySelect").val() == 32) {
+      searchTerm = "cartoons";
+    }
+
+    console.log(`Category: ${searchTerm}`)
+    photosURL = (photosURL + "&query=" + searchTerm);
+    console.log(photosURL);
+    getPhotos(photosURL);
+  }
+  $('#changeSettings').on('click', function () {
+    changeSettings();
+    photoSettings();
+  });
   // ===================================================================================
   // High Scores
   // ===================================================================================
-
+  $("#startScores").click(function (event) {
+    $("#scoreModal").show();
+  });
+  // close timed game modal when clicking "x"
+  $(".close").click(function (event) {
+    $("#scoreModal").hide();
+  });
+  // close timed game modal when clicking outside modal
+  $(window).click(function (event) {
+    if (event.target == scoreModal) {
+      $("#scoreModal").hide();
+    }
+  });
+  // Show the name
+  // Show the options settings
   $("#saveBtn");
 });
