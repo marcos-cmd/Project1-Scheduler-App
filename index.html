@@ -34,7 +34,7 @@
                     <!--Grid column-->
                     <div class="col-md-6 mb-4">
 
-<!--============================================================================================================================================================================-->
+                        <!--============================================================================================================================================================================-->
                         <!-- Endless Game Card -->
                         <div class="card gradient-card">
                             <div class="card-image" id="backgroundImg"
@@ -60,15 +60,16 @@
                                 </div>
                                 <p class="text-muted"></p>
                                 <h4 class="text-uppercase font-weight-bold my-4">Details</h4>
-                                <p class="text-muted" align="justify">Endless Game Mode allows you to play a neverending trivia
+                                <p class="text-muted" align="justify">Endless Game Mode allows you to play a neverending
+                                    trivia
                                     game. Your score increases by 1 with every correct answer.</p>
                             </div>
                         </div>
-                        <!-- Quick Game Card -->
+                        <!-- Endless Game Card -->
 
                     </div>
                     <!--Grid column-->
-<!--============================================================================================================================================================================-->
+                    <!--============================================================================================================================================================================-->
                     <!--Grid column-->
                     <div class="col-md-6 mb-4">
 
@@ -79,11 +80,11 @@
                                 style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
                                 <!-- Content -->
-                                <a href="#!">
+                                <a id="startTimed">
                                     <div class="text-white d-flex h-100 mask purple-gradient-rgba">
                                         <div class="first-content align-self-center p-3">
                                             <h3 class="card-title">Timed Game</h3>
-                                            <p class="lead mb-0">Click on this card to begin game.</p>
+                                            <p class="lead mb-0"></p>
                                         </div>
                                         <div class="second-content  align-self-center mx-auto text-center">
                                             <i class="fas fa-stopwatch fa-3x"></i>
@@ -110,7 +111,7 @@
 
                     </div>
                     <!--Grid column-->
-<!--============================================================================================================================================================================-->
+                    <!--============================================================================================================================================================================-->
                     <!--Grid column-->
                     <div class="col-md-6 mb-4">
 
@@ -121,7 +122,7 @@
                                 style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
                                 <!-- Content -->
-                                <a href="#!">
+                                <a id="startOptions">
                                     <div class="text-white d-flex h-100 mask peach-gradient-rgba">
                                         <div class="first-content align-self-center p-3">
                                             <h3 class="card-title">Options</h3>
@@ -152,7 +153,7 @@
 
                     </div>
                     <!--Grid column-->
-<!--============================================================================================================================================================================-->
+                    <!--============================================================================================================================================================================-->
                     <!--Grid column-->
                     <div class="col-md-6 mb-4">
 
@@ -163,7 +164,7 @@
                                 style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
                                 <!-- Content -->
-                                <a href="#!">
+                                <a id="startScores">
                                     <div class="text-white d-flex h-100 mask aqua-gradient-rgba">
                                         <div class="first-content align-self-center p-3">
                                             <h3 class="card-title">High Scores</h3>
@@ -198,14 +199,14 @@
         </div>
     </div>
 
-<!--============================================================================================================================================================================-->
+    <!--============================================================================================================================================================================-->
 
     <!--Endless Game Modal Begin-->
     <div class="modal" id="gameModal">
         <span class="close">&times;</span>
 
         <!-- Jumbotron Begin-->
-        <div class="card card-image" id="backgroundImg"
+        <div class="card card-image" id="endlessBackground"
             style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
             <div class="text-white text-center rgba-stylish-strong py-5 px-4">
 
@@ -248,9 +249,9 @@
     </div>
     <!--Endless Game Modal End-->
 
-<!--============================================================================================================================================================================-->
+    <!--============================================================================================================================================================================-->
     <!--Timed Game Modal Begin-->
-    <div class="modal" id="gameModal">
+    <div class="modal" id="timeModal">
         <span class="close">&times;</span>
 
         <!-- Jumbotron Begin-->
@@ -297,17 +298,118 @@
     </div>
     <!--Timed Game Modal End-->
 
-<!--============================================================================================================================================================================-->
+    <!--============================================================================================================================================================================-->
     <!--Options Modal Begin-->
     <div class="modal" id="optionsModal">
         <span class="close">&times;</span>
-        
+        <!-- Options jumbotron -->
+        <div class="jumbotron text-center hoverable p-4">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+                    <!-- Test image -->
+                    <div class="view overlay">
+                        <img id="testImage" src="https://mdbootstrap.com/img/Photos/Others/laptop-sm.jpg"
+                            class="img-fluid inline-block" alt="Sample image for first version of blog listing">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-7 text-md-left ml-3 mt-3">
+
+                    <!-- Excerpt -->
+                    <a class="blue-text">
+                        <h4 class="h4 pb-1"><i class="fas fa-cogs pr-1"></i> Settings</h4>
+                    </a>
+
+                    <h6 class="h6 mb-4">These options influence your timed game settings.</h6>
+
+                    <!--Number of Questions select-->
+                    <select id="numSelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                        <option value="15">15 Questions</option>
+                        <option value="20">20 Questions</option>
+                        <option value="25">25 Questions</option>
+                    </select>
+                    <label class="mdb-main-label">Number of Questions</label>
+                    <!--/Questions select-->
+                    <br>
+                    <!--Category select-->
+                    <select class="mdb-select md-form colorful-select dropdown-primary" id="categorySelect">
+                        <option value="any">Any Category</option>
+                        <option value="9">General Knowledge</option>
+                        <option value="10">Books</option>
+                        <option value="11">Film</option>
+                        <option value="12">Music</option>
+                        <option value="13">Musicals & Theatres</option>
+                        <option value="14">Television</option>
+                        <option value="15">Video Games</option>
+                        <option value="16">Board Games</option>
+                        <option value="17">Science & Nature</option>
+                        <option value="18">Computers</option>
+                        <option value="19">Mathematics</option>
+                        <option value="20">Mythology</option>
+                        <option value="21">Sports</option>
+                        <option value="22">Geography</option>
+                        <option value="23">History</option>
+                        <option value="24">Politics</option>
+                        <option value="25">Art</option>
+                        <option value="26">Celebrities</option>
+                        <option value="27">Animals</option>
+                        <option value="28">Vehicles</option>
+                        <option value="29">Comics</option>
+                        <option value="30">Gadgets</option>
+                        <option value="31">Japanese Anime & Manga</option>
+                        <option value="32">Cartoon & Animations</option>
+                    </select>
+                    <label class="mdb-main-label">Select Category</label>
+                    <!--/Category select-->
+                    <br>
+                    <!--Difficulty select-->
+                    <select id="difficultySelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <!--/Difficulty select-->
+                    <br>
+                    <!--Timer select-->
+                    <select id="timerSelect" class="mdb-select md-form colorful-select dropdown-primary">
+                        <option value="30">30 Seconds</option>
+                        <option value="20">20 Seconds</option>
+                        <option value="10">10 Seconds</option>
+                    </select>
+                    <label class="mdb-main-label">Select Time per Question</label>
+                    <!--/ Timer select-->
+                    <br>
+
+                    <br>
+                    <button id="changeSettings" class="btn sunny-morning-gradient">Change Settings</button>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- News jumbotron -->
     </div>
     <!--Options Modal End-->
 
-<!--============================================================================================================================================================================-->
+    <!--============================================================================================================================================================================-->
     <!--High Scores Modal Begin-->
-    <div class="modal" id="gameModal">
+    <div class="modal" id="scoreModal">
         <span class="close">&times;</span>
 
     </div>
