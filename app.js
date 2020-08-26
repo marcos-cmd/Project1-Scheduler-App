@@ -44,17 +44,17 @@ $(document).ready(function () {
     function useApiData(data) {
       $("#category").html(`Category: ${data.results[0].category}`);
       $("#difficulty").html(`Difficulty: ${data.results[0].difficulty}`);
-      $("#question").html(`Question: ${data.results[0].question}`);
+      $("#endlessQuestion").html(`Question: ${data.results[0].question}`);
       shuffle();
-      $("#answer1").html(data.results[0].correct_answer);
-      $("#answer2").html(data.results[0].incorrect_answers[0]);
-      $("#answer3").html(data.results[0].incorrect_answers[1]);
-      $("#answer4").html(data.results[0].incorrect_answers[2]);
+      $("#endlessAnswer1").html(data.results[0].correct_answer);
+      $("#endlessAnswer2").html(data.results[0].incorrect_answers[0]);
+      $("#endlessAnswer3").html(data.results[0].incorrect_answers[1]);
+      $("#endlessAnswer4").html(data.results[0].incorrect_answers[2]);
     }
 
     // function to shuffle the endless game mode's answers' order
     function shuffle(e) {
-      const parent = $("#shuffle");
+      const parent = $("#endlessShuffle");
       const divs = parent.children();
       while (divs.length) {
         parent.append(
@@ -65,42 +65,42 @@ $(document).ready(function () {
 
     // This function color-codes the correct answer green and incorrect answers red
     function outlineAnswers() {
-      if ($("#answer1").hasClass("blue-gradient")) {
-        $("#answer1")
+      if ($("#endlessAnswer1").hasClass("blue-gradient")) {
+        $("#endlessAnswer1")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-success");
-        $("#answer2")
+        $("#endlessAnswer2")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
-        $("#answer3")
+        $("#endlessAnswer3")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
-        $("#answer4")
+        $("#endlessAnswer4")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
         $("#score").text(`Score: ${score}`);
       }
     }
     function resetOutline() {
-      if ($("#answer1").hasClass("btn-outline-success")) {
-        $("#answer1")
+      if ($("#endlessAnswer1").hasClass("btn-outline-success")) {
+        $("#endlessAnswer1")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-success");
-        $("#answer2")
+        $("#endlessAnswer2")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
-        $("#answer3")
+        $("#endlessAnswer3")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
-        $("#answer4")
+        $("#endlessAnswer4")
           .toggleClass("blue-gradient")
           .toggleClass("btn-outline-danger");
         $("#score").text(`Score: ${score}`);
       }
     }
     // Correct Answer 1 onClick function
-    $("#answer1").click(function (event) {
-      if ($("#answer1").hasClass("blue-gradient")) {
+    $("#endlessAnswer1").click(function (event) {
+      if ($("#endlessAnswer1").hasClass("blue-gradient")) {
         score++;
         $("#response").text("You are correct!");
       }
@@ -109,19 +109,19 @@ $(document).ready(function () {
     });
 
     // Incorrect Answer 2 onClick function
-    $("#answer2").click(function (event) {
+    $("#endlessAnswer2").click(function (event) {
       outlineAnswers();
       $("#response").text("You are wrong!");
     });
 
     // Incorrect Answer 3 onClick function
-    $("#answer3").click(function (event) {
+    $("#endlessAnswer3").click(function (event) {
       outlineAnswers();
       $("#response").text("You are wrong!");
     });
 
     // Incorrect Answer  4 onClick function
-    $("#answer4").click(function (event) {
+    $("#endlessAnswer4").click(function (event) {
       outlineAnswers();
       $("#response").text("You are wrong!");
     });
@@ -150,10 +150,10 @@ $(document).ready(function () {
       $("#category").hide();
       $("#difficulty").hide();
       $("#score").hide();
-      $("#answer1").hide();
-      $("#answer2").hide();
-      $("#answer3").hide();
-      $("#answer4").hide();
+      $("#endlessAnswer1").hide();
+      $("#endlessAnswer2").hide();
+      $("#endlessAnswer3").hide();
+      $("#endlessAnswer4").hide();
       $("#nextQ").hide();
       $("#endGame").hide();
     });
