@@ -7,7 +7,8 @@ $(document).ready(function () {
 
     var modal = document.getElementById("gameModal"); // get the endless game mode modal
 
-    var startBtn = document.getElementById("startGame"); // Get the button that opens the modal
+    var startBtn = document.getElementById("startGame");
+     // Get the button that opens the modal
 
     var closeBtn = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
@@ -50,7 +51,7 @@ $(document).ready(function () {
       $("#answer3").html(data.results[0].incorrect_answers[1]);
       $("#answer4").html(data.results[0].incorrect_answers[2]);
     }
-
+    
     // function to shuffle the endless game mode's answers' order
     function shuffle(e) {
       const parent = $("#shuffle");
@@ -163,6 +164,7 @@ $(document).ready(function () {
   // Open Timed Game modal onClick function
   $("#startTimed").click(function (event) {
     $("#timeModal").show();
+    // useTriviaQ(triviaQ);
   });
   // close timed game modal when clicking "x"
   $(".close").click(function (event) {
@@ -176,6 +178,21 @@ $(document).ready(function () {
   });
 
   // Score is related time left for question (If you answer at the last second, you get 1/30 points)
+
+  function useTriviaQ(triviaQ) {
+  $("#category").html(`Category: ${triviaQ.results[0].category}`);
+  $("#difficulty").html(`Difficulty: ${triviaQ.results[0].difficulty}`);
+  shuffle();
+
+  //for loop function
+  for (let i = 0; i < triviaQ.results.length; i++){
+  $("#timedQuestion").html(`Question: ${triviaQ.results[i].question}`);
+  $("#timedAnswer1").html(`${triviaQ.results[i].correct_answer}`);
+  $("#timedAnswer2").html(`${triviaQ.results[i].incorrect_answers[0]}`);
+  $("#timedAnswer3").html(`${triviaQ.results[i].incorrect_answers[1]}`);
+  $("#timedAnswer4").html(`${triviaQ.results[i].incorrect_answers[2]}`);
+  }};
+
 
   // question one pathway: results[0]
   // Timer
@@ -206,7 +223,7 @@ $(document).ready(function () {
   let triviaURL = `https://opentdb.com/api.php?`;
 
   let category = "";
-  let amount = "5"
+  let amount = "5";
 
   function getQuestions(triviaURL) {
     $.ajax({
@@ -214,6 +231,8 @@ $(document).ready(function () {
       method: "GET"
     }).done(function (triviaQ) {
       console.log(triviaQ);
+      useTriviaQ(triviaQ);
+        // let triviaQ = response.json();
     });
   }
 
@@ -224,6 +243,7 @@ $(document).ready(function () {
     triviaURL = triviaURL + `&category=${category}`;
     difficulty = $("#difficultySelect").val();
     triviaURL = triviaURL + `&difficulty=${difficulty}`;
+    triviaURL = triviaURL + `&type=multiple`;
     console.log(triviaURL);
     getQuestions(triviaURL);
   }
