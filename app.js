@@ -144,9 +144,7 @@ $(document).ready(function () {
         "</button>",
       ];
       // Displays high score, name input, and save high score button
-      $("#question")
-        .html(`Your final score: ${score}`)
-        .append(newHTML.join(""));
+      $("#endlessQuestion").html(`Your final score: ${score}`).append(newHTML.join(""));
       $("#category").hide();
       $("#difficulty").hide();
       $("#score").hide();
@@ -164,9 +162,7 @@ $(document).ready(function () {
   // Open Timed Game modal onClick function
   $("#startTimed").click(function (event) {
     $("#timeModal").show();
-    // getQuestions(newTriviaURL);
- 
-    // useTriviaQ(triviaQ);
+    useTriviaQ(triviaQ);
   });
   // close timed game modal when clicking "x"
   $(".close").click(function (event) {
@@ -181,21 +177,21 @@ $(document).ready(function () {
 
   // Score is related time left for question (If you answer at the last second, you get 1/30 points)
 
+
+  var counter = 0;
+
   function useTriviaQ(triviaQ) {
-
-    shuffle();
-
-    //for loop function
-    for (let i = 0; i < triviaQ.results.length; i++) {
-      $("#timedCategory").html(`Category: ${triviaQ.results[0].category}`);
-      $("#timedDifficulty").html(`Difficulty: ${triviaQ.results[0].difficulty}`);
-      $("#timedQuestion").html(`Question: ${triviaQ.results[i].question}`);
-      $("#timedAnswer1").html(`${triviaQ.results[i].correct_answer}`);
-      $("#timedAnswer2").html(`${triviaQ.results[i].incorrect_answers[0]}`);
-      $("#timedAnswer3").html(`${triviaQ.results[i].incorrect_answers[1]}`);
-      $("#timedAnswer4").html(`${triviaQ.results[i].incorrect_answers[2]}`);
+    if (counter < triviaQ.results.length) {
+      $("#timedCategory").html(`Category: ${triviaQ.results[counter].category}`);
+      $("#timedDifficulty").html(`Difficulty: ${triviaQ.results[counter].difficulty}`);
+      $("#timedQuestion").html(`Question: ${triviaQ.results[counter].question}`);
+      shuffle();
+      $("#timedAnswer1").html(`${triviaQ.results[counter].correct_answer}`);
+      $("#timedAnswer2").html(`${triviaQ.results[counter].incorrect_answers[0]}`);
+      $("#timedAnswer3").html(`${triviaQ.results[counter].incorrect_answers[1]}`);
+      $("#timedAnswer4").html(`${triviaQ.results[counter].incorrect_answers[2]}`);
     }
-  };
+  }
 
   // function to shuffle the endless game mode's answers' order
   function shuffle(e) {
@@ -275,6 +271,7 @@ $(document).ready(function () {
   $("#nextQ").click(function (event) {
     timedResetOutline();
     $("#timedResponse").text("");
+    counter++;
   });
 
   // question one pathway: results[0]
@@ -306,6 +303,7 @@ $(document).ready(function () {
   let newTriviaURL;
   // let amount = 5;
   // let amount = $("#numSelect").val();
+  let triviaQ = [];
 
   function changeSettings() {
     let category = "";
@@ -314,12 +312,12 @@ $(document).ready(function () {
     //console log 
     console.log("numSelect: " + $("#numSelect").val());
     console.log("amount: " + amount);
-    
+
     amountURL = `amount=${amount}`;
     category = $("#categorySelect").val();
     categoryURL = `&category=${category}`;
     difficulty = $("#difficultySelect").val();
-    difficultyURL =`&difficulty=${difficulty}`;
+    difficultyURL = `&difficulty=${difficulty}`;
     newTriviaURL = triviaURL + amountURL + categoryURL + difficultyURL + `&type=multiple`;
     console.log(newTriviaURL);
     console.log("amount: " + triviaURL);
@@ -330,12 +328,12 @@ $(document).ready(function () {
     $.ajax({
       url: newTriviaURL,
       method: "GET"
-    }).done(function (triviaQ) {
-      console.log(triviaQ);
-      useTriviaQ(triviaQ);
-      // let triviaQ = response.json();
-    })};
-  
+    }).done(function (data) {
+      console.log(data);
+      triviaQ.push(data);
+    })
+  }
+
   //------------------------------------------------------------------------------------
   //Photo-API "Unsplash"
 
