@@ -285,10 +285,10 @@ $(document).ready(function () {
   $("#timedEndGame").click(function (event) {
     const newHTML = [
       '<div class="md-form">',
-      '<input id="name" value="John Doe" type="text" class="form-control w-25 mx-auto text-center text-white">',
+      '<input id="playerName" value="John Doe" type="text" class="form-control w-25 mx-auto text-center text-white">',
       "</div>",
       "<br>",
-      '<button class="btn blue-gradient btn-rounded mb-4" id="saveBtn">Save High Score',
+      '<button class="btn blue-gradient btn-rounded mb-4" id="timedSaveBtn">Save High Score',
       "</button>",
     ];
     // Displays high score, name input, and save high score button
@@ -520,6 +520,69 @@ $(document).ready(function () {
       $("#scoreModal").hide();
     }
   });
+
+const playerName = $("playerName").val();
+const player = {
+  name: playerName, 
+  score: timedScore
+}
+
+$("#timedSaveBtn").click(function (event) {
+  saveToLocalStorage(player);
+  console.log(player);
+});
+
+const displayRankings = (currentPlayer = {}) => {
+  const players = JSON.parse(localStorage.getItem('players'));
+
+  const rankings = $(`<div class="card">
+                    <div class= "card-header">
+                      <h3>Score Table</h3>
+                    </div>
+                  </div >`);
+
+  const playerList = $('<ul class="list-group list-group-flush"></ul>');
+  
+  if(players !== null) {
+    sortArray(players);
+    players.forEach((player, index) => {
+      if (currentPlayer.name === player.name && currentPlayer !== {}) {
+        playerList.append(`<li class="list-group-item font-weight-bold mt-1">${index + 1}. ${player.name} <span class="player_score">${player.timedScore}</span></li>`);
+      } else {
+        playerList.append(`<li class="list-group-item mt-1">${index + 1}. ${player.name} <span class="player_score">${player.timedScore}</span></li>`);
+      }
+    })
+  }
+  
+  rankings.append(playerList);
+  $('#score_table').append(rankings);
+}
+
+// Array that sorts the players array by the score
+const sortArray = (arr) => {
+  arr.sort((a, b) => {
+    const scoreA = a.score;
+    const scoreB = b.score;
+    if (scoreA < scoreB)
+      return 1
+    if (scoreA > scoreB)
+      return -1
+    return 0
+  })
+}
+
+//saves to local storage
+function saveToLocalStorage(player) {
+  if (localStorage.getItem('players')===null) {
+    const players = [];
+    players.push(player);
+    localStorage.setItem('players', JSON.stringify(players));
+  } else {
+    const players = JSON.parse(localStorage.getItem('players'));
+    players.push(player);
+    localStorage.setItem('players', JSON.stringify(players));
+  }
+}
 
   // Show the name
   // Show the options settings
