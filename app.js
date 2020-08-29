@@ -54,8 +54,8 @@ $(document).ready(function () {
     }
 
     // function to shuffle the endless game mode's answers' order
-    function shuffle(e) {
-      const parent = $("#endlessShuffle");
+    function timedShuffle(e) {
+      const parent = $("#timedShuffle");
       const divs = parent.children();
       while (divs.length) {
         parent.append(
@@ -178,10 +178,11 @@ $(document).ready(function () {
   });
 
   // Score is related time left for question (If you answer at the last second, you get 1/30 points)
-
+  var timedScore = 0;
   var counter = 0;
 
   function useTriviaQ(triviaQ) {
+    $("#timedEndGame").hide();
     if (counter < triviaQ.results.length) {
       $("#timedCategory").html(`Category: ${triviaQ.results[counter].category}`);
       $("#timedDifficulty").html(`Difficulty: ${triviaQ.results[counter].difficulty}`);
@@ -191,6 +192,9 @@ $(document).ready(function () {
       $("#timedAnswer2").html(`${triviaQ.results[counter].incorrect_answers[0]}`);
       $("#timedAnswer3").html(`${triviaQ.results[counter].incorrect_answers[1]}`);
       $("#timedAnswer4").html(`${triviaQ.results[counter].incorrect_answers[2]}`);  
+      $("#timedBackgroundImg").attr("style", "background-image:" + ` url(${photos.results[counter].urls.regular});"`);
+    } else if (counter = ((triviaQ.results.length) - 1)){
+      $("#timedEndGame").show();
     }
   }
 
@@ -220,7 +224,7 @@ $(document).ready(function () {
       $("#timedAnswer4")
         .toggleClass("blue-gradient")
         .toggleClass("btn-outline-danger");
-      $("#timedScore").text(`Score: ${score}`);
+      $("#timedScore").text(`Score: ${timedScore}`);
     }
   }
   function timedResetOutline() {
@@ -237,13 +241,14 @@ $(document).ready(function () {
       $("#timedAnswer4")
         .toggleClass("blue-gradient")
         .toggleClass("btn-outline-danger");
-      $("#timedScore").text(`Score: ${score}`);
+      $("#timedScore").text(`Score: ${timedScore}`);
     }
   }
   // Correct Answer 1 onClick function
   $("#timedAnswer1").click(function (event) {
     if ($("#timedAnswer1").hasClass("blue-gradient")) {
-      // score++;
+      timedScore++;
+      timedScore = timedScore + timerScore;
       $("#timedResponse").text("You are correct!");
     }
     timedOutlineAnswers();
@@ -269,21 +274,51 @@ $(document).ready(function () {
   });
 
   // Next Button onClick function
-  $("#nextQ").click(function (event) {
+  $("#timedNextQ").click(function (event) {
     timedResetOutline();
     $("#timedResponse").text("");
     counter++;
+    useTriviaQ(triviaQ);
+    setTimer();
+  });
+
+  $("#timedEndGame").click(function (event) {
+    const newHTML = [
+      '<div class="md-form">',
+      '<input id="name" value="John Doe" type="text" class="form-control w-25 mx-auto text-center text-white">',
+      "</div>",
+      "<br>",
+      '<button class="btn blue-gradient btn-rounded mb-4" id="saveBtn">Save High Score',
+      "</button>",
+    ];
+    // Displays high score, name input, and save high score button
+    $("#timedQuestion").html(`Your final score: ${timedScore}`).append(newHTML.join(""));
+    $("#timedCategory").hide();
+    $("#timedDifficulty").hide();
+    $("#timedScore").hide();
+    $("#timedAnswer1").hide();
+    $("#timedAnswer2").hide();
+    $("#timedAnswer3").hide();
+    $("#timedAnswer4").hide();
+    $("#timedNextQ").hide();
+    $("#timedResponse").hide();
+    $("#timedEndGame").hide();
+    $("#Timer").hide();
   });
 
   // Timer
+  var timerScore = 0;
     function setTimer() {
     var timeleft = $("#timerSelect").val();
     var downloadTimer = setInterval(function () {
-      console.log (timeleft)
+      timerScore = parseInt(timeleft);
+        console.log(timerScore);
       if (timeleft <= 0) {
         $("#Timer").html(`Time's Up!`);
         clearInterval(downloadTimer);
         //   document.getElementById("countdown").innerHTML = "Finished";
+      }  else if ($("#timedAnswer1").hasClass("btn-outline-success")){
+        clearInterval(downloadTimer);
       } else {
         $("#Timer").html(`Timer: ${timeleft}`);
       }
@@ -365,6 +400,8 @@ $(document).ready(function () {
 
   let searchTerm = "";
 
+  let photos;
+
   function getPhotos(photosURL) {
     $.ajax({
       url: photosURL,
@@ -376,6 +413,7 @@ $(document).ready(function () {
       console.log(image);
       // We want this to loop through each photo as you move on to the next question
       $("#testImage").attr("src", `${image}`);
+      photos = photoData;
     });
   }
 
@@ -482,6 +520,7 @@ $(document).ready(function () {
       $("#scoreModal").hide();
     }
   });
+
   // Show the name
   // Show the options settings
   $("#saveBtn");

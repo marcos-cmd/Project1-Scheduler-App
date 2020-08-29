@@ -197,7 +197,6 @@
                   View the high scores for each game type.<br>
                   <br>
                   <br>
-                  <br>
                 </p>
               </div>
             </div>
@@ -267,8 +266,9 @@
     <span class="close">&times;</span>
 
     <!-- Jumbotron Begin-->
-    <div class="card card-image" id="backgroundImg"
+    <div class="card card-image" id="timedBackgroundImg"
       style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
+
       <div class="text-white text-center rgba-stylish-strong py-5 px-4">
 
         <!-- Game Info Text Row -->
@@ -288,7 +288,7 @@
           <p class="mb-4 pb-2 px-md-5 mx-md-5"></p>
           <!--Answer Buttons-->
           <div class="container">
-            <div class="row" id="shuffle">
+            <div class="row" id="timedShuffle">
               <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="timedAnswer1"></button></div>
               <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="timedAnswer2"></button></div>
               <div class="col-md"><button class="btn blue-gradient btn-rounded mb-4" id="timedAnswer3"></button></div>
@@ -298,23 +298,9 @@
           <!--Correct vs Incorrect-->
           <p class="card-text py-2" id="timedResponse"></p>
           <!--Other Buttons-->
-          <button class="btn peach-gradient btn-rounded mb-4" id="nextQ">Next Question</button>
-          <button class="btn mean-fruit-gradient btn-rounded mb-4" id="endGame">End Game</button>
+          <button class="btn peach-gradient btn-rounded mb-4" id="timedNextQ">Next Question</button>
+          <button class="btn mean-fruit-gradient btn-rounded mb-4" id="timedEndGame">End Game</button>
         </div>
-        <div class="col-md">
-          <button class="btn blue-gradient btn-rounded mb-4" id="answer4"></button>
-        </div>
-      </div>
-    </div>
-    <!--Correct vs Incorrect-->
-    <p class="card-text py-2" id="response"></p>
-    <!--Other Buttons-->
-    <button class="btn peach-gradient btn-rounded mb-4" id="nextQ">
-      Next Question
-    </button>
-    <button class="btn mean-fruit-gradient btn-rounded mb-4" id="endGame">
-      End Game
-    </button>
   </div>
   </div>
   </div>
@@ -442,7 +428,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <script src="app.js"></script>
-  <script src="timer.js"></script>
 </body>
 
 </html>
