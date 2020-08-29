@@ -9,15 +9,15 @@ As someone with immense useless knowledge, I want to be able to test that knowle
 If I am a student, maybe I want to test knowledge of a certain category. 
 
 ## Layout
-(./assets/homescrn.png)
+![screenshot of the homescreen](assets/homescrn.png)
 
 ## Change settings in the Options Menu
-(./assets/settings.png)
+![screenshot of the settings](assets/settings.png)
 
 ## Test your knowledge
-(./assets/myth.png)
+![screenshot of the timed game mode](assets/myth.png)
 
-(./assets/animal.png)
+![screenshot of another question](assets/animal.png)
 
 ## Save your high score
-(./assets/savescore.png)
+![screenshot of the save screen](assets/savescore.png)
