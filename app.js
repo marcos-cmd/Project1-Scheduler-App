@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   // ===================================================================================
   // Endless Game Mode
   // ===================================================================================
@@ -177,7 +178,6 @@ $(document).ready(function () {
 
   // Score is related time left for question (If you answer at the last second, you get 1/30 points)
 
-
   var counter = 0;
 
   function useTriviaQ(triviaQ) {
@@ -299,11 +299,11 @@ $(document).ready(function () {
 
   //------------------------------------------------------------------------------------
   // TRIVIA API : https://opentdb.com/
-  let triviaURL = `https://opentdb.com/api.php?`;
+  const triviaURL = `https://opentdb.com/api.php?`;
   let newTriviaURL;
   // let amount = 5;
   // let amount = $("#numSelect").val();
-  let triviaQ = [];
+  let triviaQ;
 
   function changeSettings() {
     let category = "";
@@ -317,11 +317,17 @@ $(document).ready(function () {
     category = $("#categorySelect").val();
     categoryURL = `&category=${category}`;
     difficulty = $("#difficultySelect").val();
+
+    //console log
+    console.log("category: " + category);
+    console.log("difficulty: " + difficulty);
+
     difficultyURL = `&difficulty=${difficulty}`;
     newTriviaURL = triviaURL + amountURL + categoryURL + difficultyURL + `&type=multiple`;
-    console.log(newTriviaURL);
     console.log("amount: " + triviaURL);
     getQuestions(newTriviaURL);
+    console.log("newTriviaURL = " + newTriviaURL);
+
   }
 
   function getQuestions(newTriviaURL) {
@@ -330,7 +336,10 @@ $(document).ready(function () {
       method: "GET"
     }).done(function (data) {
       console.log(data);
-      triviaQ.push(data);
+      triviaQ = data;
+      console.log(triviaQ);      
+      // triviaQ.push(data);
+
     })
   }
 
