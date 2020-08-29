@@ -54,8 +54,8 @@ $(document).ready(function () {
     }
 
     // function to shuffle the endless game mode's answers' order
-    function timedShuffle(e) {
-      const parent = $("#timedShuffle");
+    function shuffle(e) {
+      const parent = $("#shuffle");
       const divs = parent.children();
       while (divs.length) {
         parent.append(
@@ -187,7 +187,7 @@ $(document).ready(function () {
       $("#timedCategory").html(`Category: ${triviaQ.results[counter].category}`);
       $("#timedDifficulty").html(`Difficulty: ${triviaQ.results[counter].difficulty}`);
       $("#timedQuestion").html(`Question: ${triviaQ.results[counter].question}`);
-      shuffle();
+      timedShuffle();
       $("#timedAnswer1").html(`${triviaQ.results[counter].correct_answer}`);
       $("#timedAnswer2").html(`${triviaQ.results[counter].incorrect_answers[0]}`);
       $("#timedAnswer3").html(`${triviaQ.results[counter].incorrect_answers[1]}`);
@@ -199,8 +199,8 @@ $(document).ready(function () {
   }
 
   // function to shuffle the endless game mode's answers' order
-  function shuffle(e) {
-    const parent = $("#shuffle");
+  function timedShuffle(e) {
+    const parent = $("#timedShuffle");
     const divs = parent.children();
     while (divs.length) {
       parent.append(
