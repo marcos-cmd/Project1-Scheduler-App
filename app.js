@@ -164,6 +164,7 @@ $(document).ready(function () {
   $("#startTimed").click(function (event) {
     $("#timeModal").show();
     useTriviaQ(triviaQ);
+    setTimer();
   });
   // close timed game modal when clicking "x"
   $(".close").click(function (event) {
@@ -189,7 +190,7 @@ $(document).ready(function () {
       $("#timedAnswer1").html(`${triviaQ.results[counter].correct_answer}`);
       $("#timedAnswer2").html(`${triviaQ.results[counter].incorrect_answers[0]}`);
       $("#timedAnswer3").html(`${triviaQ.results[counter].incorrect_answers[1]}`);
-      $("#timedAnswer4").html(`${triviaQ.results[counter].incorrect_answers[2]}`);
+      $("#timedAnswer4").html(`${triviaQ.results[counter].incorrect_answers[2]}`);  
     }
   }
 
@@ -274,9 +275,21 @@ $(document).ready(function () {
     counter++;
   });
 
-  // question one pathway: results[0]
   // Timer
-  // 
+    function setTimer() {
+    var timeleft = $("#timerSelect").val();
+    var downloadTimer = setInterval(function () {
+      console.log (timeleft)
+      if (timeleft <= 0) {
+        $("#Timer").html(`Time's Up!`);
+        clearInterval(downloadTimer);
+        //   document.getElementById("countdown").innerHTML = "Finished";
+      } else {
+        $("#Timer").html(`Timer: ${timeleft}`);
+      }
+      timeleft -= 1;
+    }, 1000);
+  }
 
   // ===================================================================================
   // Options
